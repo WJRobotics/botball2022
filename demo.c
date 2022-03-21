@@ -1,0 +1,1 @@
+#include <stdio.h>#include <kipr/botball.h>#include "wj.h"int main(){printf("stuff");moveWheels(0, 1, 1000, 300);// moveServo(0, 300, 50);return 1;}
