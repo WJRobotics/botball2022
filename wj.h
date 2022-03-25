@@ -28,7 +28,7 @@ int moveWheels(int port1, int port2, int time, int vel){
 
 int goTillBlack(int port1, int port2, int vel){
 while(stopAtBlackLine()!=1){
-	printf("analog 0 ", analog(0));
+	printf("analog 0: %d\n", analog(0));
 	mav(port1, vel);
 	mav(port2, -vel);
 
