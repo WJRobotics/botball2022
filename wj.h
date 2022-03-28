@@ -3,7 +3,17 @@
 
 //used for stop on black line
 //measures the initial height and color
-#define  COLOR_WHITE 2000;
+#define BLACK_TAPE 3900);
+
+
+int detectBlack(int tophat){
+if(analog(tophat)<4000){
+return 1;
+}
+return 0;
+
+}
+
 
 // moves at a set velocity
 // vel is in ticks  per second
@@ -28,7 +38,7 @@ int moveWheels(int port1, int port2, int time, int vel){
 
 int goTillBlack(int port1, int port2, int vel){
 while(stopAtBlackLine()!=1){
-	printf("analog 0: %d\n", analog(0));
+	printf("analog %d \n", analog(0));
 	mav(port1, vel);
 	mav(port2, -vel);
 
@@ -73,8 +83,8 @@ int turnPlace(int port1, int port2, int time, int vel){
 }
 
 int stopAtBlackLine(){
-	//printf("analog 0: "+(String(analog(0));	
-	if(analog(0)>4000){
+	//printf("analog 0: "+(String(analog(0)));
+	if(analog(0) > (int)BLACK_TAPE){ // why broke????
 // stop the stuff
 		return 1;
 	}
