@@ -3,7 +3,7 @@
 
 //used for stop on black line
 //measures the initial height and color
-#define BLACK_TAPE 3900
+#define BLACK_TAPE 3900);
 
 
 int detectBlack(int tophat){
@@ -91,4 +91,3 @@ int stopAtBlackLine(){
 // dont stop the stuff
 	return 0;
 }
-//
