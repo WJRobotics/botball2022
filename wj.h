@@ -1,17 +1,20 @@
 #include <stdio.h>
 #include <kipr/botball.h>
+//#include <decimal.h>
 
 //used for stop on black line
 //measures the initial height and color
-#define BLACK_TAPE 3900);
-
-
+#define BLACK_TAPE (3900)
+#define WHEEL_TO_WHEEL (16.25)
+//  ^ is the distance between each wheel on jimmy in centimeters
+// if the color reading from the tophat 
+// if its greater than the tape value
+// returns 1, else returns 0
 int detectBlack(int tophat){
-if(analog(tophat)<4000){
+if(analog(tophat) > (int) (BLACK_TAPE) ){
 return 1;
 }
 return 0;
-
 }
 
 
@@ -27,17 +30,12 @@ return 0;
 // assumes that port 2 is facing the direction opposite to the motion
 // moves both wheels in the same direction
 int moveWheels(int port1, int port2, int time, int vel){
-	if(stopAtBlackLine(0) == 0) {
-		mav(port1, vel);
-		mav(port2, -vel);
-		msleep(time);
-	}else{
-	freeze(port1);
-	freeze(port2);}
+return 1;
 }
-
+// go till analog 0 detects a color over 3900 on a tophat
 int goTillBlack(int port1, int port2, int vel){
-while(stopAtBlackLine()!=1){
+printf("analog %d /n", analog(0));
+while(detectBlack(0)==0){
 	printf("analog %d \n", analog(0));
 	mav(port1, vel);
 	mav(port2, -vel);
@@ -45,7 +43,7 @@ while(stopAtBlackLine()!=1){
 }
 freeze(port1);
 freeze(port2);
-
+return 1;
 }
 
 // opens the servo 
@@ -69,25 +67,21 @@ int moveServo(int port, int pos, int time){
 int moveMotor(int port, int vel, int time){
 	mav(port, vel);
 	msleep(time);
+	return 1;
+}
+// 16.25 centimeters is the distance from one wheel to another
+// wheel circumference is 3.5cm
+// C = 2(pi)r, so full circumference of single wheel turn is about
+// 102.10176 cm
+// quarter circle is 25.5254 cm
+// turn decimal is how much of a circle the robot should turn
+//  given velocity determines the direction
+// but is also impacted by the wheel port given
+int turnOneWheel(int port, int velocity, int turnDegree){
+mav(port, velocity);
+int time = (turnDegree*WHEEL_TO_WHEEL) / velocity;
+msleep(time);
+freeze(port);
+return 1;
 }
 
-// turns the robot in place
-// time in ms
-// vel in ticks per second
-// same conversion as move wheels
-
-int turnPlace(int port1, int port2, int time, int vel){
-	mav(port1, vel);
-	mav(port2, vel);
-	msleep(time);
-}
-
-int stopAtBlackLine(){
-	//printf("analog 0: "+(String(analog(0)));
-	if(analog(0) > (int)BLACK_TAPE){ // why broke????
-// stop the stuff
-		return 1;
-	}
-// dont stop the stuff
-	return 0;
-}
