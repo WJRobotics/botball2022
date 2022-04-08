@@ -69,19 +69,15 @@ int moveMotor(int port, int vel, int time){
 	msleep(time);
 	return 1;
 }
-// 16.25 centimeters is the distance from one wheel to another
-// wheel circumference is 3.5cm
-// C = 2(pi)r, so full circumference of single wheel turn is about
-// 102.10176 cm
-// quarter circle is 25.5254 cm
-// turn decimal is how much of a circle the robot should turn
-//  given velocity determines the direction
-// but is also impacted by the wheel port given
-int turnOneWheel(int port, int velocity, int turnDegree){
-mav(port, velocity);
-int time = (turnDegree*WHEEL_TO_WHEEL) / velocity;
-msleep(time);
-freeze(port);
-return 1;
-}
 
+// turns one wheel
+// port is the motor port to turn
+// vel is the velocity in ticks per second to turn at, goes from -1000 to 1000
+// rot is how much of a rotation in ticks to turn, some constant values defined at top
+int turn(int port, int vel, int ticks){
+	cmpc(port); // clears the motor position counter
+	while(gmpc(port)<rot){ // while the position counter is less than the rotation value
+		motor(port, vel); // move the motor at velocity
+	}
+	return 1;
+}
