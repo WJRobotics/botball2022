@@ -54,7 +54,7 @@ return 1;
 // this differs for different amounts, trial and error ig
 int moveServo(int port, int pos, int time){
 	enable_servo(port);
-	set_servo_position(pos);
+	set_servo_position(port, pos);
 	msleep(time);
 	disable_servo(port);
 	return 1;
