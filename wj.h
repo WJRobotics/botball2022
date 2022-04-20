@@ -70,6 +70,12 @@ int moveMotor(int port, int vel, int time){
 	return 1;
 }
 
+// should move the create forward at velocity for the given time
+int createDrive(int vel, int time){
+	create_drive(vel);
+	msleep(time);
+}
+
 // turns one wheel
 // port is the motor port to turn
 // vel is the velocity in ticks per second to turn at, goes from -1000 to 1000
