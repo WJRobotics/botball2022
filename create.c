@@ -1,21 +1,24 @@
 #include <kipr/botball.h>
 #include "wj.h"
 #define ARMPORT 0
-#define ARMUP 1500
-#define ARMDOWN 200
+#define ARMDOWN 200 
+#define ARMUP 1780
 
-
+// make sure to add the tournament light stuff
 int main(){
-  // connect to the roomba
-  create_connect();
-  // do the other stuff
-  moveServo(ARMPORT, ARMDOWN);
-  
-  moveServo(ARMPORT, ARMUP);
-  
-  create_drive(300, 0);
-  msleep(2000);
-  create_stop();
-  
-  return 1;
-  {
+printf("hello");
+// connect to the roomba
+create_connect();
+moveServo(ARMPORT, ARMDOWN, 1000);
+// asuming starts next to balls
+moveServo(ARMPORT, ARMUP, 2000);
+msleep(3000);
+// drive towards the transporter
+
+
+create_stop();
+
+
+// then do stuff
+return 1;
+}
