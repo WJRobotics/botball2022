@@ -5,7 +5,7 @@
 //used for stop on black line
 //measures the initial height and color
 #define BLACK_TAPE (3900)
-#define WHEEL_TO_WHEEL (16.25)
+#define WHEEL_TO_WHEEL (17)
 //  ^ is the distance between each wheel on jimmy in centimeters
 // if the color reading from the tophat 
 // if its greater than the tape value
@@ -29,9 +29,9 @@ return 0;
 // time is in milliseconds
 // assumes that port 2 is facing the direction opposite to the motion
 // moves both wheels in the same direction
-int moveWheels(int port1, int port2, int time, int vel){
-return 1;
-}
+
+
+
 // go till analog 0 detects a color over 3900 on a tophat
 int goTillBlack(int port1, int port2, int vel){
 printf("analog %d /n", analog(0));
@@ -69,21 +69,34 @@ int moveMotor(int port, int vel, int time){
 	msleep(time);
 	return 1;
 }
+// turns out wheel to wheel was 17cm, so all that is wrong
+// 16.25 centimeters is the distance from one wheel to another
+// wheel circumference is 3.5cm
+// C = 2(pi)r, so full circumference of single wheel turn is about
+// 102.10176 cm
+// quarter circle is 25.5254 cm
+// turn decimal is how much of a circle the robot should turn
+//  given velocity determines the direction
+// but is also impacted by the wheel port given
 
-// should move the create forward at velocity for the given time
-int createDrive(int vel, int time){
-	create_drive(vel);
+
+int turn(){
+printf("hello");
+cmpc(0);
+while(gmpc(0)<1400){
+motor(0, 100);
+}
+//mrp(0, 800, 1500);
+msleep(1000);
+return 1;
+}
+
+int createSpinCW(int vel, int time){
+	create_spin_CW(vel);
 	msleep(time);
 }
 
-// turns one wheel
-// port is the motor port to turn
-// vel is the velocity in ticks per second to turn at, goes from -1000 to 1000
-// rot is how much of a rotation in ticks to turn, some constant values defined at top
-int turn(int port, int vel, int ticks){
-	cmpc(port); // clears the motor position counter
-	while(gmpc(port)<rot){ // while the position counter is less than the rotation value
-		motor(port, vel); // move the motor at velocity
-	}
-	return 1;
+int createSpinCCW(int vel, int time){
+	create_spin_CCW(vel);
+	msleep(time);
 }
