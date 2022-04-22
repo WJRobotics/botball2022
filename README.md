@@ -1,10 +1,3 @@
 # botball2022
 
-to compile things
-cc <filename> -lwallaby -o <execname>
-  for example : cc demo.c -lwallaby -o demo
- this can be run with ./<filename> 
-  ie ./demo
-  
-to save and exit files - ctrl + x, y, enter
-  
+Period 2 Documentation Link: https://docs.google.com/document/d/1BJHGGK0iUsfbkT9_kmz_t3Ah1EwLlNgDuV6MD-5vxXs/edit?usp=sharing
