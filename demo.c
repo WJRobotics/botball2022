@@ -17,7 +17,8 @@ motor(0, 300);
 msleep(1000);
 ao();*/
 
-moveServo(0, 200, 1000);
-moveServo(0, 1000, 1000);
+moveServo(0, LIFTER_DOWN, 1000);
+moveServo(0, LIFTER_MID, 1000);
+moveServo(0, LIFTER_DOWN, 1000);
 return 1;
 }
