@@ -2,6 +2,11 @@
 #include <kipr/botball.h>
 #include "wj.h"
 
+#define LIFTER_DOWN 1350
+#define LIFTER_MID 1530
+
+
+
 int main(){
 printf("stuff");
 //turnOneWheel(0,100,180);
