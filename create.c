@@ -11,15 +11,11 @@ int main(){
 printf("hello");
 // connect to the roomba
 create_connect();
-moveServo(ARMPORT, ARMDOWN, 1000);
-// asuming starts next to balls
-moveServo(ARMPORT, ARMUP, 2000);
-msleep(3000);
-// drive towards the transporter
-
-
+wait_for_light(0);
+create_drive_straight(100);
+msleep(5000);
 create_stop();
-
+create_disconnect();
 
 // then do stuff
 return 1;
