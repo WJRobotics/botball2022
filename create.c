@@ -13,24 +13,45 @@ printf("hello");
 create_connect();
 //wait_for_light(0); // starts when the light turns on
 //shut_down_in(118); // makes sure everything turns off within the timelimit
-// the lifter arm should start at position 2000
-enable_servo(0);
-set_servo_position(0, 50); // drops the right side of the plow and sets up to lift the thing later
-msleep(1000);
-create_spin_CW(100); // spins the roomba to face the door
-msleep(500);
-create_stop();
-create_drive_straight(400); // drives towards the door
-msleep(2000);
-create_stop();
-create_spin(100);
-create_drive_straight(100);
-msleep(500);
-create_stop();
+create_drive_straight(-100);
+ msleep(700);
+//create_drive_straight(100);
+//msleep(1500); // gets the roomba over the first black line
+    create_stop();
+while(analog(0)<3500){
+	    create_drive_straight(100); // until it hits the second line keep moving forward
+}
+    msleep(1600);
+    create_stop();
+    // once it finds the line, pivot so its facing the transporter
+    create_spin_CW(100);
+    msleep(1500); // should be a quarter revolution
+    create_stop();
     
-set_servo_position(0, 2010); // resets the arm servo
-msleep(1000);
-disable_servo(0);
+while(analog(0)<3500){
+    // keep driving straight until it hits the line in front of the gate
+    create_drive_straight(100);
+}
+    msleep(1200); // puts the center on the line
+    
+    create_stop();
+    create_spin_CCW(100);
+    msleep(1500); // another quarter turn so that it faces the gate
+    create_drive_straight(100);
+    msleep(1000); // move into the gate
+    create_stop();
+    // then lift the gate
+    
+    // add lift code
+    // backup to get on the line
+    create_drive_straight(-100);
+    msleep(1200);
+    create_stop();
+    create_spin_CW(100);
+    msleep(1500);
+    create_drive_straight(200);
+    msleep(2000);
+    
 ao();
 create_stop();
 create_disconnect();
